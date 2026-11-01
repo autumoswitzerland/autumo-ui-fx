@@ -1,0 +1,15 @@
+# autumo Internal Security Key (ISK)
+#
+# Default key for internal, application-independent password encryption
+# (obfuscation / line-of-sight protection, not a cryptographic secret).
+# It is used by CryptUtils for the "internal" encoding when a value must be
+# encrypted without an application-specific (unique) security key.
+#
+# This file is read once, lazily, from the classpath - it also works when the
+# library is packaged inside a JAR. It is maintained by hand and only read.
+#
+# key  : the internal security key as hex bytes (16 bytes = 128 bit)
+# date : the date this key was last changed (ISO-8601, YYYY-MM-DD)
+#
+key=0x3F,0xFFFFFFC8,0xFFFFFFA5,0x71,0xFFFFFF9B,0xFFFFFFDE,0x02,0x4F,0xFFFFFF84,0xFFFFFFE7,0xFFFFFFB6,0x19,0x5D,0x33,0xFFFFFFF0,0x7A
+date=2026-10-20

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import ch.autumo.ui.fx.control.HTMLLabel?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root fx:id="codeEditorPane" minHeight="400.0" minWidth="480.0" prefHeight="800.0" prefWidth="1280.0" styleClass="default-Info-pane code-editor-view" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <!-- Header: fixed height (60px) - it must never shrink or grow with the window. -->
+      <BorderPane fx:id="defaultInfoHeader" maxHeight="60.0" minHeight="60.0" prefHeight="60.0" prefWidth="1280.0" styleClass="default-info-header">
+         <padding>
+            <Insets left="12.0" right="12.0" />
+         </padding>
+         <left>
+	       <Label fx:id="defaultInfoHeaderLabel" minHeight="0.0" minWidth="0.0" prefHeight="60.0" styleClass="default-info-header-label" text="">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets left="0.0" />
+               </BorderPane.margin></Label>
+         </left>
+         <right>
+            <ImageView fx:id="defaultInfoHeaderImage" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets right="8.0" />
+               </BorderPane.margin></ImageView>
+         </right>
+      </BorderPane>
+	</top>
+	<center>
+      <!-- Body: the only flexible part - it takes whatever the window gives (min 400x480 pane). -->
+      <BorderPane fx:id="defaultInfoBodyFrame" minHeight="0.0" prefHeight="680.0" prefWidth="1280.0" styleClass="default-info-body">
+         <padding>
+            <Insets bottom="32.0" left="24.0" right="24.0" top="32.0" />
+         </padding>
+         <center>
+            <BorderPane fx:id="defaultInfoBody" minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="1280.0">
+            </BorderPane>
+         </center>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </BorderPane>
+	</center>
+	<!-- Footer: fixed height (60px) - the buttons must never be clipped by resizing. -->
+	<bottom>
+      <BorderPane fx:id="defaultInfoFooter" layoutY="532.0" maxHeight="60.0" minHeight="60.0" prefHeight="60.0" prefWidth="1280.0" styleClass="default-info-footer">
+         <padding>
+            <Insets left="22.0" right="16.0" />
+         </padding>
+         <!-- The note label sits in the CENTER slot: the right slot (buttons) is laid out first
+              and always keeps its full width, so the buttons are never clipped or overlapped;
+              the label gives way (minWidth 0) and is truncated instead. -->
+         <center>
+			<BorderPane fx:id="defaultInfoFooterCenter" maxHeight="60.0" minHeight="0.0" prefHeight="60.0" styleClass="default-info-footer">
+			  <left>
+			     <StackPane alignment="CENTER_LEFT" maxHeight="Infinity" minHeight="0.0" prefHeight="60.0">
+			        <HTMLLabel fx:id="defaultInfoFooterLabel"
+			                   minHeight="0.0" minWidth="0.0"
+			                   maxHeight="-Infinity"
+			                   styleClass="default-info-footer-label" text="">
+			        </HTMLLabel>
+			     </StackPane>
+			  </left>
+			</BorderPane>
+         </center>
+         <right>
+			<!-- No fixed prefWidth: the pane grows to its buttons' width, so 'Enter' and the
+			     buttons stay fully visible at every window width down to the 640px minimum. -->
+			<BorderPane fx:id="defaultInfoFooterButtons" maxHeight="60.0" minHeight="0.0" prefHeight="60.0" styleClass="default-info-footer" BorderPane.alignment="CENTER_RIGHT">
+			  <right>
+	            <!-- NOTE: no defaultButton here - 'Enter' belongs to the editor (newline), it must
+	                 not fire 'Alright' and close the pane while the user is typing. -->
+	            <HBox alignment="CENTER_RIGHT" spacing="8.0" BorderPane.alignment="CENTER_RIGHT">
+	              <children>
+	                <HBox fx:id="codeEditorButtons" alignment="CENTER_RIGHT" spacing="8.0" />
+	                <Button fx:id="defaultInfoFooterButton" alignment="CENTER" contentDisplay="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="100.0" styleClass="default-info-footer-button" text="%button.Close" BorderPane.alignment="CENTER">
+	                   <HBox.margin>
+	                      <Insets right="8.0" />
+	                   </HBox.margin>
+	                </Button>
+	              </children>
+	            </HBox>
+         	  </right>
+			</BorderPane>
+         </right>
+      </BorderPane>
+   </bottom>
+</fx:root>

@@ -1,0 +1,269 @@
+# gettext message catalogue of the autumo-ui-fx framework.
+# English is the source language, so a message id is the English text;
+# {0}, {1}, ... are java.text.MessageFormat arguments, keep them.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: autumo-ui 1.2.0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Base
+msgid "application.name"
+msgstr ""
+
+msgid "base.status0"
+msgstr ""
+
+msgid "base.status1"
+msgstr ""
+
+# Buttons
+msgid "button.Open"
+msgstr ""
+
+msgid "button.OK"
+msgstr ""
+
+msgid "button.Alright"
+msgstr ""
+
+msgid "button.License"
+msgstr ""
+
+msgid "button.Cancel"
+msgstr ""
+
+msgid "button.Close"
+msgstr ""
+
+msgid "button.Remove"
+msgstr ""
+
+# Menu
+msgid "menu.File"
+msgstr ""
+
+msgid "menu.Open"
+msgstr ""
+
+msgid "menu.Recent"
+msgstr ""
+
+msgid "menu.Clear"
+msgstr ""
+
+msgid "menu.Quit"
+msgstr ""
+
+msgid "menu.Config"
+msgstr ""
+
+msgid "menu.Remove"
+msgstr ""
+
+msgid "menu.Reg"
+msgstr ""
+
+msgid "menu.Register"
+msgstr ""
+
+msgid "menu.Help"
+msgstr ""
+
+msgid "menu.Update"
+msgstr ""
+
+msgid "menu.About"
+msgstr ""
+
+msgid "dialog.Confirmation"
+msgstr ""
+
+msgid "dialog.Information"
+msgstr ""
+
+msgid "dialog.Warning"
+msgstr ""
+
+msgid "dialog.Remove.ask"
+msgstr ""
+
+msgid "dialog.Remove.info"
+msgstr ""
+
+msgid "dialog.Remove.info"
+msgstr ""
+
+msgid "dialog.Exception.was"
+msgstr ""
+
+msgid "Update.title"
+msgstr ""
+
+msgid "Update.subtitle"
+msgstr ""
+
+msgid "Update.here"
+msgstr ""
+
+msgid "Update.cannotcheck"
+msgstr ""
+
+msgid "Update.available"
+msgstr ""
+
+msgid "Update.notavailable"
+msgstr ""
+
+msgid "Update.nonewversion"
+msgstr ""
+
+msgid "Error.title"
+msgstr ""
+
+msgid "About.title"
+msgstr ""
+
+msgid "License.title"
+msgstr ""
+
+msgid "Remove.title"
+msgstr ""
+
+msgid "Encoder.title"
+msgstr ""
+
+msgid "Encoder.label.pw"
+msgstr ""
+
+msgid "Encoder.label.value"
+msgstr ""
+
+msgid "Encoder.label.raw"
+msgstr ""
+
+msgid "Encoder.label.format"
+msgstr ""
+
+msgid "Encoder.label.enc"
+msgstr ""
+
+msgid "Encoder.button.copy"
+msgstr ""
+
+msgid "Encoder.enc.err1"
+msgstr ""
+
+msgid "Encoder.enc.err2"
+msgstr ""
+
+msgid "Encoder.enc.err3"
+msgstr ""
+
+# JSON formatter (JSONFormatterView / UI.showJsonFormatter)
+msgid "JSONFormatter.title"
+msgstr ""
+
+msgid "JSONFormatter.button.copy"
+msgstr ""
+
+msgid "JSONFormatter.button.clear"
+msgstr ""
+
+msgid "JSONFormatter.button.format"
+msgstr ""
+
+msgid "JSONFormatter.note.copied"
+msgstr ""
+
+msgid "JSONFormatter.parse.error"
+msgstr ""
+
+msgid "Installer.installation"
+msgstr ""
+
+msgid "Installer.next"
+msgstr ""
+
+msgid "Installer.back"
+msgstr ""
+
+msgid "Installer.finish"
+msgstr ""
+
+msgid "Installer.lic.title"
+msgstr ""
+
+msgid "Installer.lic.accept"
+msgstr ""
+
+msgid "Installer.term.accept"
+msgstr ""
+
+msgid "Installer.done.title"
+msgstr ""
+
+msgid "Installer.done.info"
+msgstr ""
+
+msgid "reg.firstName"
+msgstr ""
+
+msgid "reg.lastName"
+msgstr ""
+
+msgid "reg.company"
+msgstr ""
+
+msgid "reg.city"
+msgstr ""
+
+msgid "reg.country"
+msgstr ""
+
+msgid "reg.email"
+msgstr ""
+
+msgid "reg.licenseKey"
+msgstr ""
+
+msgid "Registration.title"
+msgstr ""
+
+msgid "Registration.active"
+msgstr ""
+
+msgid "Registration.stored"
+msgstr ""
+
+msgid "Registration.notactive"
+msgstr ""
+
+msgid "Registration.necessary"
+msgstr ""
+
+msgid "Registration.validation.requiered"
+msgstr ""
+
+msgid "Registration.validation.email"
+msgstr ""
+
+msgid "Registration.validation.license.invalid"
+msgstr ""
+
+msgid "Registration.okay"
+msgstr ""
+
+msgid "Registration.cancel"
+msgstr ""
+
+msgid "Registration.setup.fail"
+msgstr ""
+
+msgid "Registration.online.fail"
+msgstr ""
+
+msgid "Registration.invalid"
+msgstr ""

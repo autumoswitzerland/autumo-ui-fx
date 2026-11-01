@@ -1,0 +1,264 @@
+# gettext message catalogue of the autumo-ui-fx framework.
+# English is the source language, so a message id is the English text;
+# {0}, {1}, ... are java.text.MessageFormat arguments, keep them.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: autumo-ui 1.2.0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+
+# Base
+msgid "application.name"
+msgstr "autumo UI Demo"
+
+msgid "base.status0"
+msgstr "File: "
+
+msgid "base.status1"
+msgstr "-"
+
+# Buttons
+msgid "button.Open"
+msgstr " Open"
+
+msgid "button.OK"
+msgstr "OK"
+
+msgid "button.Alright"
+msgstr "Alright"
+
+msgid "button.License"
+msgstr "License"
+
+msgid "button.Cancel"
+msgstr "Cancel"
+
+msgid "button.Close"
+msgstr "Close"
+
+msgid "button.Remove"
+msgstr "Remove"
+
+# Menu
+msgid "menu.File"
+msgstr "File"
+
+msgid "menu.Open"
+msgstr "Open..."
+
+msgid "menu.Recent"
+msgstr "Open Recent"
+
+msgid "menu.Clear"
+msgstr "Clear Entries"
+
+msgid "menu.Quit"
+msgstr "Quit"
+
+msgid "menu.Config"
+msgstr "Configuration"
+
+msgid "menu.Remove"
+msgstr "Remove App Data"
+
+msgid "menu.Reg"
+msgstr "Registration"
+
+msgid "menu.Register"
+msgstr "Register..."
+
+msgid "menu.Help"
+msgstr "Help"
+
+msgid "menu.Update"
+msgstr "Check for Updates..."
+
+msgid "menu.About"
+msgstr "About"
+
+msgid "dialog.Confirmation"
+msgstr "Confirmation"
+
+msgid "dialog.Information"
+msgstr "Information"
+
+msgid "dialog.Warning"
+msgstr "Warning"
+
+msgid "dialog.Remove.ask"
+msgstr "Do you really want to remove application data?"
+
+msgid "dialog.Remove.info"
+msgstr "Application data has been removed, application will quit."
+
+msgid "dialog.Exception.was"
+msgstr "The Exception was:"
+
+msgid "Update.title"
+msgstr "Checking for updates..."
+
+msgid "Update.subtitle"
+msgstr "Checking for updates..."
+
+msgid "Update.here"
+msgstr "Download here"
+
+msgid "Update.cannotcheck"
+msgstr "Cannot check for updates. Try later or establish Internet connection."
+
+msgid "Update.available"
+msgstr "Free version available: "
+
+msgid "Update.notavailable"
+msgstr "Paid updates available: "
+
+msgid "Update.nonewversion"
+msgstr "No new version available."
+
+msgid "Error.title"
+msgstr "An error occured!"
+
+msgid "About.title"
+msgstr "About autumo Documents Viewer"
+
+msgid "License.title"
+msgstr "License"
+
+msgid "Remove.title"
+msgstr "Remove App Data"
+
+msgid "Encoder.title"
+msgstr "Encoder"
+
+msgid "Encoder.label.pw"
+msgstr "Password:"
+
+msgid "Encoder.label.value"
+msgstr "Value:"
+
+msgid "Encoder.label.raw"
+msgstr "Raw file vlaue:"
+
+msgid "Encoder.label.format"
+msgstr "Format"
+
+msgid "Encoder.label.enc"
+msgstr "Encryption:"
+
+msgid "Encoder.button.copy"
+msgstr "Copy"
+
+msgid "Encoder.enc.err1"
+msgstr "You have to define a seed in your application configuration first before encoding passwords!<br><br>See 'app.cfg', configuration key 'secret_key_seed'."
+
+msgid "Encoder.enc.err2"
+msgstr "Couldn't encode password!"
+
+# JSON formatter (JSONFormatterView / UI.showJsonFormatter)
+msgid "JSONFormatter.title"
+msgstr "JSON Formatter"
+
+msgid "JSONFormatter.button.copy"
+msgstr "Copy"
+
+msgid "JSONFormatter.button.clear"
+msgstr "Clear"
+
+msgid "JSONFormatter.button.format"
+msgstr "Format JSON"
+
+msgid "JSONFormatter.note.copied"
+msgstr "JSON data has been copied to clipboard!"
+
+msgid "JSONFormatter.parse.error"
+msgstr "The JSON result couldn't be parsed from the interface; the syntax seems corrupted! Check console output."
+
+msgid "Installer.installation"
+msgstr "Installation"
+
+msgid "Installer.next"
+msgstr "Next"
+
+msgid "Installer.back"
+msgstr "Previous"
+
+msgid "Installer.finish"
+msgstr "Start"
+
+msgid "Installer.lic.title"
+msgstr "License Agreement"
+
+msgid "Installer.lic.accept"
+msgstr "Accept License"
+
+msgid "Installer.term.accept"
+msgstr "Accept Terms and Conditions"
+
+msgid "Installer.done.title"
+msgstr "Done!"
+
+msgid "Installer.done.info"
+msgstr "All installation steps done."
+
+msgid "reg.firstName"
+msgstr "First name:"
+
+msgid "reg.lastName"
+msgstr "Last name:"
+
+msgid "reg.company"
+msgstr "Company:"
+
+msgid "reg.city"
+msgstr "City:"
+
+msgid "reg.country"
+msgstr "Country:"
+
+msgid "reg.email"
+msgstr "Email:"
+
+msgid "reg.licenseKey"
+msgstr "License key:"
+
+msgid "Registration.title"
+msgstr "Registration"
+
+msgid "Registration.active"
+msgstr "This copy of {0} has been successfully registered."
+
+msgid "Registration.stored"
+msgstr "The entered registration information has been stored, but the application\nhasn't been registered yet, because no valid license key has been provided."
+
+msgid "Registration.notactive"
+msgstr "This copy of {0} is not registered."
+
+msgid "Registration.necessary"
+msgstr "This feature is only available for registered copies of {0}. "
+
+msgid "Registration.validation.requiered"
+msgstr "This field is required."
+
+msgid "Registration.validation.email"
+msgstr "This field must contain a valid email address."
+
+msgid "Registration.validation.license.invalid"
+msgstr "Your license is not valid!"
+
+msgid "Registration.okay"
+msgstr "Okay"
+
+msgid "Registration.cancel"
+msgstr "Cancel"
+
+msgid "Registration.setup.fail"
+msgstr "Your application-setup is corrupted!\nRegistration can't be made. Contact us: {0}."
+
+msgid "Registration.online.fail"
+msgstr "Couldn't contact registration server, try it later again."
+
+msgid "Registration.invalid"
+msgstr "Your license is invalid. If this is an error,\ncontact us: {0}."

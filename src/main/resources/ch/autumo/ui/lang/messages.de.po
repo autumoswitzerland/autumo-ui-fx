@@ -1,0 +1,264 @@
+# gettext message catalogue of the autumo-ui-fx framework.
+# English is the source language, so a message id is the English text;
+# {0}, {1}, ... are java.text.MessageFormat arguments, keep them.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: autumo-ui 1.2.0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+
+# Base
+msgid "application.name"
+msgstr "autumo UI"
+
+msgid "base.status0"
+msgstr "Datei: "
+
+msgid "base.status1"
+msgstr "-"
+
+# Buttons
+msgid "button.Open"
+msgstr " Öffne"
+
+msgid "button.OK"
+msgstr "OK"
+
+msgid "button.Alright"
+msgstr "Okay"
+
+msgid "button.License"
+msgstr "Lizenz"
+
+msgid "button.Cancel"
+msgstr "Abbrechen"
+
+msgid "button.Close"
+msgstr "Schliessen"
+
+msgid "button.Remove"
+msgstr "Entfernen"
+
+# Menu
+msgid "menu.File"
+msgstr "Datei"
+
+msgid "menu.Open"
+msgstr "Öffne..."
+
+msgid "menu.Recent"
+msgstr "Öffne Letzte"
+
+msgid "menu.Clear"
+msgstr "Einträge löschen"
+
+msgid "menu.Quit"
+msgstr "Quit"
+
+msgid "menu.Config"
+msgstr "Konfiguration"
+
+msgid "menu.Remove"
+msgstr "App-Daten entfernen"
+
+msgid "menu.Reg"
+msgstr "Registrierung"
+
+msgid "menu.Register"
+msgstr "Registrieren..."
+
+msgid "menu.Help"
+msgstr "Hilfe"
+
+msgid "menu.Update"
+msgstr "Nach Aktualisierungen suchen..."
+
+msgid "menu.About"
+msgstr "Über"
+
+msgid "dialog.Confirmation"
+msgstr "Bestätigung"
+
+msgid "dialog.Information"
+msgstr "Information"
+
+msgid "dialog.Warning"
+msgstr "Warnung"
+
+msgid "dialog.Remove.ask"
+msgstr "Möchten Sie die Anwendungsdaten wirklich entfernen?"
+
+msgid "dialog.Remove.info"
+msgstr "Die Anwendungsdaten wurden entfernt, die Anwendung wird beendet."
+
+msgid "dialog.Exception.was"
+msgstr "Die Ausnahme war:"
+
+msgid "Update.title"
+msgstr "Auf Updates prüfen..."
+
+msgid "Update.subtitle"
+msgstr "Auf Updates prüfen..."
+
+msgid "Update.here"
+msgstr "Hier herunterladen"
+
+msgid "Update.cannotcheck"
+msgstr "Es kann nicht nach Updates gesucht werden. Versuchen Sie es später oder stellen Sie eine Internetverbindung her."
+
+msgid "Update.available"
+msgstr "Kostenlose Version verfügbar: "
+
+msgid "Update.notavailable"
+msgstr "Kostenpflichtige Updates verfügbar:  "
+
+msgid "Update.nonewversion"
+msgstr "Keine neue Version verfügbar."
+
+msgid "Error.title"
+msgstr "Ein Fehler ist aufgetreten!"
+
+msgid "About.title"
+msgstr "Über den autumo UI"
+
+msgid "License.title"
+msgstr "Lizenz"
+
+msgid "Remove.title"
+msgstr "App-Daten entfernen"
+
+msgid "Encoder.title"
+msgstr "Encoder"
+
+msgid "Encoder.label.pw"
+msgstr "Passwort:"
+
+msgid "Encoder.label.value"
+msgstr "Wert:"
+
+msgid "Encoder.label.raw"
+msgstr "Datei-Rohwert:"
+
+msgid "Encoder.label.format"
+msgstr "Format"
+
+msgid "Encoder.label.enc"
+msgstr "Verschlüsselung:"
+
+msgid "Encoder.button.copy"
+msgstr "Kopieren"
+
+msgid "Encoder.enc.err1"
+msgstr "Sie müssen zuerst einen Seed in Ihrer Anwendungs-Konfiguration definieren, bevor Passwörter verschlüsselt werden können!<br><br>Siehe 'app.cfg', Konfigurationsschlüssel 'secret_key_seed'."
+
+msgid "Encoder.enc.err2"
+msgstr "Das Passwort konnte nicht verschlüsselt werden!"
+
+# JSON-Formatter (JSONFormatterView / UI.showJsonFormatter)
+msgid "JSONFormatter.title"
+msgstr "JSON-Formatter"
+
+msgid "JSONFormatter.button.copy"
+msgstr "Kopieren"
+
+msgid "JSONFormatter.button.clear"
+msgstr "Löschen"
+
+msgid "JSONFormatter.button.format"
+msgstr "JSON formatieren"
+
+msgid "JSONFormatter.note.copied"
+msgstr "Die JSON-Daten wurden in die Zwischenablage kopiert!"
+
+msgid "JSONFormatter.parse.error"
+msgstr "Das JSON-Ergebnis konnte nicht aus der Oberfläche geparst werden; die Syntax scheint fehlerhaft zu sein! Konsolenausgabe prüfen."
+
+msgid "Installer.installation"
+msgstr "Installation"
+
+msgid "Installer.next"
+msgstr "Nächstes"
+
+msgid "Installer.back"
+msgstr "Vorheriges"
+
+msgid "Installer.finish"
+msgstr "Start"
+
+msgid "Installer.lic.title"
+msgstr "Lizenzvereinbarung"
+
+msgid "Installer.lic.accept"
+msgstr "Lizenz akzeptieren"
+
+msgid "Installer.term.accept"
+msgstr "Bedingungen und Konditionen akzeptieren"
+
+msgid "Installer.done.title"
+msgstr "Fertig!"
+
+msgid "Installer.done.info"
+msgstr "Alle Installationsschritte beendet."
+
+msgid "reg.firstName"
+msgstr "Vorname:"
+
+msgid "reg.lastName"
+msgstr "Nachname:"
+
+msgid "reg.company"
+msgstr "Firma:"
+
+msgid "reg.city"
+msgstr "Stadt:"
+
+msgid "reg.country"
+msgstr "Land:"
+
+msgid "reg.email"
+msgstr "E-Mail:"
+
+msgid "reg.licenseKey"
+msgstr "Lizenzschlüssel:"
+
+msgid "Registration.title"
+msgstr "Registrierung"
+
+msgid "Registration.active"
+msgstr "Diese Kopie von {0} wurde erfolgreich registriert."
+
+msgid "Registration.stored"
+msgstr "Die eingegebenen Registrierungsinformationen wurden gespeichert, aber die Anwendung\nwurde noch nicht registriert, da kein gültiger Lizenzschlüssel eingegeben wurde."
+
+msgid "Registration.notactive"
+msgstr "Diese Kopie von {0} ist nicht registriert."
+
+msgid "Registration.necessary"
+msgstr "Diese Funktion ist nur für registrierte Kopien von {0} verfügbar. "
+
+msgid "Registration.validation.requiered"
+msgstr "Dieses Feld ist erforderlich."
+
+msgid "Registration.validation.email"
+msgstr "Dieses Feld muss eine gültige E-Mail Adresse enthalten."
+
+msgid "Registration.validation.license.invalid"
+msgstr "Ihre Lizenz ist nicht gültig!"
+
+msgid "Registration.okay"
+msgstr "Okay"
+
+msgid "Registration.cancel"
+msgstr "Abbrechen"
+
+msgid "Registration.setup.fail"
+msgstr "Ihr Anwendungs-Setup ist beschädigt!\nDie Registrierung kann nicht durchgeführt werden. Kontaktieren Sie uns: {0}."
+
+msgid "Registration.online.fail"
+msgstr "Der Registrierungsserver konnte nicht kontaktiert werden, versuchen Sie es später noch einmal."
+
+msgid "Registration.invalid"
+msgstr "Ihre Lizenz ist ungültig. Wenn dies ein Fehler ist,\nkontaktieren Sie uns: {0}."
