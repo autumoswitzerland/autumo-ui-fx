@@ -14,6 +14,9 @@ autumo UI is a **rapid JavaFX development framework**. It provides the applicati
 shell — lifecycle, installer, i18n (PO gettext), user settings and recent files 
 — so that an application is mostly the code that is actually specific to it.
 
+**See a demo here:**
+- [https://github.com/autumoswitzerland/autumo-ui-fx-demo](https://github.com/autumoswitzerland/autumo-ui-fx-demo)
+
 ### What you can do with it
 
 An application built with autumo UI is a **finished desktop product**, not just a
@@ -35,9 +38,6 @@ window:
   MVC structure and logging with SLF4J/Log4j2 on every operating system.
 - **Full application configuration.** The configuration is handled for macOS,
   Windows and Linux/UNIX, including the OS-specific data directories.
-- **A rich base library.** Everything that is not UI comes from
-  [autumo-commons](https://products.autumo.ch/javadoc/autumo-commons/index.html),
-  with many features and ready-to-use components.
 
 There is also a commercial version of this package that provides additional components:
 
@@ -71,7 +71,7 @@ are key for development:
 - Subclass `ch.autumo.ui.fx.BaseApp` (see chapter 3).
 - Read the Java API documentation in `doc/` (generated with `./gradlew javadoc`).
 - Run the **autumo UI FX Demo** project to see a complete application in action: 
-  **TODO**
+  [https://github.com/autumoswitzerland/autumo-ui-fx-demo](https://github.com/autumoswitzerland/autumo-ui-fx-demo)
 
 ## 2. Requirements
 

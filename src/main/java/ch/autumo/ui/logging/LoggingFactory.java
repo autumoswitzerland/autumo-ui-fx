@@ -48,11 +48,11 @@ public class LoggingFactory {
 				impl = ConfigurationManager.getInstance().getString("logging_implementation");
 				if (impl == null || impl.length() == 0) {
 					// default: log4j2
-					impl = "ch.autumo.commons.logging.Log4j2Logging";
+					impl = "ch.autumo.ui.logging.Log4j2Logging";
 				}
 			} else {
 				// usually rich client side, we allow this
-				impl = "ch.autumo.commons.logging.Log4j2Logging";				
+				impl = "ch.autumo.ui.logging.Log4j2Logging";				
 			}
 			
 	        final Constructor<?> constructor = Class.forName(impl).getDeclaredConstructor();

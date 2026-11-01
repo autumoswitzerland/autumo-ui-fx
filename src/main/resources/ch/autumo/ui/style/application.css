@@ -472,6 +472,8 @@
 .license-check-box > .box {
     -fx-background-color: #dddddd !important;
     -fx-background-radius: 6;
+	-fx-background-insets: 1;
+	-fx-border-color: #444444 !important;
     -fx-border-radius: 6;
 }
 .license-check-box:selected > .box > .mark {

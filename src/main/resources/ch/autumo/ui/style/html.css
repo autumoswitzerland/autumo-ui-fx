@@ -1,23 +1,25 @@
 /**
-* Copyright (c) 2026 autumo Ltd. Switzerland
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*    http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright (c) 2026 autumo Ltd. Switzerland
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+
+@import 'fonts.css';
 
 body {
     margin-top: 0px;
-    margin-nottom: 0px;
+    margin-bottom: 0px;
     margin-left: 16px;
     margin-right: 16px;
 	background-color: #333333;
@@ -25,22 +27,17 @@ body {
     font-size: 14px;
     font-family: 'Inter', Lucida Sans Unicode, Lucida Grande, Arial, Tahoma;
 }
-
 li {
 	padding-bottom: 4px;
 }
-
 p, ol, li, ul {
-	background-color: #333333;
     color: #dddddd;
     font-size: 14px;
     font-family: 'Inter', Lucida Sans Unicode, Lucida Grande, Arial, Tahoma;
 }
-
 table {
 	border: 0;
 }
-
 th {
 	font-weight: bold; 
 	text-align: left; 
@@ -51,30 +48,25 @@ th {
 td {
 	vertical-align:top;
 }
-
 div {
     font-size: 100%;
     font-family: 'Inter', Lucida Sans Unicode, Lucida Grande, Arial, Tahoma;
 }
-
 h1 {
     font-size: 32px;
     color: #2DC7FE;
     font-family: 'Inter', Lucida Sans Unicode, Lucida Grande, Arial, Tahoma;
 }
-
 h2 {
     font-size: 20px;
     color: #0077bb;
     font-family: 'Inter', Lucida Sans Unicode, Lucida Grande, Arial, Tahoma;
 }
-
 h3 {
     font-size: 16px;
     color: #3598db;
     font-family: 'Inter', Lucida Sans Unicode, Lucida Grande, Arial, Tahoma;
 }
-
 a {
 	text-decoration: none;
     color: #2DC7FE;
