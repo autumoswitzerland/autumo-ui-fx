@@ -117,8 +117,8 @@ jobs:
 
             **Package contents:**
 
-            - autumo UI FX framework (JAR)
-            - Developer documentation (README)
+            - autumo UI FX framework
+            - Developer documentation
             - License information
             - Third-party licenses
 
@@ -126,7 +126,7 @@ jobs:
 
             - Application-shell lifecycle for Java FX desktop apps
             - Simplified JavaFX application development
-            — Installer, i18n (PO gettext), user settings and recent files 
+            - Installer, i18n (PO gettext), user settings and recent files 
             - MVC-based application architecture
             - Reusable UI components and utilities
             - HTML-based views
