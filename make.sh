@@ -113,6 +113,10 @@ then
 	cp ../../README.md .
 	mkdir -p etc/doc
 	cp ../../etc/doc/autumo-ui-fx-logo.png etc/doc/
+
+	cp -R ../../build/docs/javadoc etc/doc/
+	cp -R ../../etc/doc/javadoc/fonts etc/doc/javadoc/
+	cp -R ../../etc/doc/javadoc/autumo.css etc/doc/javadoc/
 	
 	mkdir -p lib
 	cp ../../build/libs/autumo-ui-fx-$VERSION.jar lib/
