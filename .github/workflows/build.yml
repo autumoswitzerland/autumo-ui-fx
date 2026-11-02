@@ -1,0 +1,119 @@
+###############################################################################
+#
+#  autumo UI FX - GitHub Build & Release Workflow
+#  Copyright: 2026 autumo GmbH
+#  Version: 1.0
+#
+###############################################################################
+
+name: Product Build & Release
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag (e.g. v1.2.0)'
+        required: true
+        type: string
+
+jobs:
+  build:
+    name: Build Product
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java (Azul Zulu 25 + JavaFX)
+        uses: actions/setup-java@v5
+        with:
+          distribution: zulu
+          java-version: '25'
+          java-package: jdk+fx
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Validate release version
+        shell: bash
+        run: |
+          VERSION=$(sed -n 's/^VERSION=//p' make.sh | head -n 1)
+          TAG="${{ inputs.tag }}"
+
+          if [ -z "$VERSION" ]; then
+            echo "::error::Could not determine VERSION from make.sh"
+            exit 1
+          fi
+
+          if [ "$TAG" != "v$VERSION" ]; then
+            echo "::error::Release tag $TAG does not match project version $VERSION"
+            exit 1
+          fi
+
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+
+      - name: Build JAR
+        run: ./gradlew build --no-daemon
+
+      - name: Create Product Package
+        shell: bash
+        run: |
+          JAR="build/libs/autumo-ui-fx-${VERSION}.jar"
+
+          if [ ! -f "$JAR" ]; then
+            echo "::error::Expected JAR not found: $JAR"
+            exit 1
+          fi
+
+          sh make.sh create
+
+          PACKAGE="product/autumo-ui-fx-${VERSION}.zip"
+
+          if [ ! -f "$PACKAGE" ]; then
+            echo "::error::Product package not found: $PACKAGE"
+            exit 1
+          fi
+
+          echo "Created product package: $PACKAGE"
+
+      - name: Upload Product Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: autumo-ui-fx-product
+          path: product/*.zip
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.tag }}
+          target_commitish: ${{ github.sha }}
+          name: autumo UI FX
+          files: product/*.zip
+          draft: false
+          prerelease: false
+          body: |
+            ## autumo UI FX ${{ env.VERSION }}
+
+            A lightweight framework for rapid JavaFX application development.
+
+            **Package contents:**
+            - autumo UI FX framework (JAR)
+            - Developer documentation (README)
+            - License information
+            - Third-party licenses
+
+            **Highlights:**
+            - MVC-based application architecture
+            - HTML-based views
+            - Reusable UI components and utilities
+            - Simplified JavaFX application development
+
+            See the [demo project](https://github.com/autumoswitzerland/autumo-ui-fx-demo).
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

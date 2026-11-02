@@ -132,6 +132,7 @@ application {
     mainClass = 'your.app.App'
 }
 
+// Allow JavaFX native access, required for interoperability with Swing/AWT on modern JDKs.
 tasks.named('run') {
     jvmArgs '--enable-native-access=javafx.graphics'
 }
