@@ -50,3 +50,7 @@ Desktop.ini
 *.bak
 *.swp
 *~
+
+# --- Gradle wrapper (must be committed, otherwise CI cannot start) ---
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
