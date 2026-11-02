@@ -58,8 +58,17 @@ jobs:
 
           echo "VERSION=$VERSION" >> "$GITHUB_ENV"
 
-      - name: Build JAR
-        run: ./gradlew build --no-daemon
+      - name: Install Xvfb
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+
+      - name: Build
+        run: |
+          if [ "$RUNNER_OS" = "Linux" ]; then
+            xvfb-run --auto-servernum ./gradlew build --no-daemon
+          else
+            ./gradlew build --no-daemon
+          fi
 
       - name: Create Product Package
         shell: bash

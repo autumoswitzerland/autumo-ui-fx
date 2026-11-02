@@ -63,6 +63,7 @@ javafx {
 }
 
 tasks.named('test') {
+    jvmArgs '--enable-native-access=javafx.graphics'
     failOnNoDiscoveredTests = false
     useJUnitPlatform()
 }
