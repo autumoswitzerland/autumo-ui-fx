@@ -111,6 +111,8 @@ then
 
 	# Documentation: the README (Markdown) and the generated PDF
 	cp ../../README.md .
+	mkdir -p etc/doc
+	cp ../../etc/doc/autumo-ui-fx-logo.png etc/doc/
 	
 	mkdir -p lib
 	cp ../../build/libs/autumo-ui-fx-$VERSION.jar lib/
