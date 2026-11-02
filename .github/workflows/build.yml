@@ -124,10 +124,12 @@ jobs:
 
             **Highlights:**
 
-            - MVC-based application architecture
-            - HTML-based views
-            - Reusable UI components and utilities
+            - Application-shell lifecycle for Java FX desktop apps
             - Simplified JavaFX application development
+            — Installer, i18n (PO gettext), user settings and recent files 
+            - MVC-based application architecture
+            - Reusable UI components and utilities
+            - HTML-based views
 
             See the [demo project](https://github.com/autumoswitzerland/autumo-ui-fx-demo).
         env:
