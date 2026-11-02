@@ -38,13 +38,13 @@ window:
 
 There is also a commercial version of this package that provides additional components:
 
-- **Licensing and registration.** The registration view, online license checks, 
-  and license file management are built into the framework. The application only 
-  needs to provide its product license key (see Chapter 7).
-- **Application update checks.**
+- **Licensing and registration.** The framework includes a registration view integrated 
+  with a fully functional licensing implementation, an online license server platform, 
+  and license file management.
 - **Common base libraries.** A collection of reusable libraries providing numerous 
   additional foundational components, primarily designed to support the application 
   lifecycle of desktop applications.
+- **Application update checks.**
 
 ### The key classes
 
