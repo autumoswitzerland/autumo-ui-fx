@@ -34,6 +34,7 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(25)
     }
+    withSourcesJar()
 }
 
 jar {
@@ -45,7 +46,6 @@ jar {
 javadoc {
     title = 'autumo UI FX ' + version + ' API'
     options.stylesheetFile = file("etc/javadoc/autumo.css")
-    options.links("https://products.autumo.ch/javadoc/autumo-commons/")
     options.windowTitle = 'autumo UI FX - Rapid Java FX development framework'
     options.docTitle = 'autumo UI FX ' + version + ' API'
     destinationDir = file("${buildDir}/docs/javadoc")

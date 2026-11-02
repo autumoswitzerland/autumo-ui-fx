@@ -116,7 +116,8 @@ then
 	
 	mkdir -p lib
 	cp ../../build/libs/autumo-ui-fx-$VERSION.jar lib/
-
+	cp ../../build/libs/autumo-ui-fx-$VERSION-sources.jar lib/
+	
 	cp ../../LICENSE.md .
 	cp ../../THIRDPARTYLICENSES.md .
 	

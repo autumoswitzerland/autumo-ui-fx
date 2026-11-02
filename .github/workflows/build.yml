@@ -68,6 +68,9 @@ jobs:
       - name: Build
         run: xvfb-run --auto-servernum ./gradlew build --no-daemon
 
+      - name: Generate Javadoc
+        run: sh javadoc.sh
+
       - name: Create Product Package
         shell: bash
         run: |

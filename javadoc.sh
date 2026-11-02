@@ -12,8 +12,15 @@
 #
 ###############################################################################
 
-	
-export JAVA_TOOL_OPTIONS="-Duser.language=en -Duser.country=US"
-gradle javadoc
-cp -R etc/javadoc/fonts build/docs/javadoc/resource-files
-export JAVA_TOOL_OPTIONS="-Duser.language=de -Duser.country=CH"
+
+cd "$(dirname "$0")" || exit 1
+
+# Generate Javadoc
+gradle javadoc || exit 1
+
+# Copy additional resources
+cp -R etc/doc/javadoc/fonts build/docs/javadoc/resource-files/
+cp etc/doc/javadoc/autumo.css build/docs/javadoc/
+
+echo "Javadoc generated in build/docs/javadoc"
+
