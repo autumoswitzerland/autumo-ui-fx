@@ -120,7 +120,7 @@ dependencies {
     
     implementation 'com.google.code.gson:gson:2.11.0'
     implementation 'org.apache.commons:commons-lang3:3.21.0'
-	implementation "net.synedra:validatorfx:1.0.0"
+    implementation "net.synedra:validatorfx:1.0.0"
     
     // Code editor component (RSyntaxTextArea + RTextScrollPane, BSD-2-Clause), embedded
     // into JavaFX with a SwingNode. The theme (cfg/edit.xml) ships with the
