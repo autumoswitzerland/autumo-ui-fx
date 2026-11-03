@@ -11,6 +11,11 @@ name: Publish to Maven Central
 
 on:
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Git release tag to publish (e.g. v1.2.0)'
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -28,20 +33,29 @@ jobs:
       GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
     steps:
-      - name: Verify release tag
+      - name: Validate release tag
         shell: bash
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
         run: |
-          echo "Event: $GITHUB_EVENT_NAME"
-          echo "Ref: $GITHUB_REF"
-          echo "Ref type: $GITHUB_REF_TYPE"
-
-          if [[ "$GITHUB_REF_TYPE" != "tag" ]]; then
-            echo "::error::Publishing is only allowed from a Git tag."
+          if [[ ! "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Invalid release tag: $RELEASE_TAG"
             exit 1
           fi
 
-      - name: Checkout repository
+      - name: Checkout release tag
         uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.release_tag }}
+
+      - name: Verify checked out version
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          echo "Release tag: $RELEASE_TAG"
+          echo "Commit: $(git rev-parse HEAD)"
+          echo "Project version: $(grep -m1 "^version =" build.gradle)"
 
       - name: Set up Java 25
         uses: actions/setup-java@v6
