@@ -47,11 +47,9 @@ public class HTMLLabel extends TextFlow {
     private static final Pattern TAG_PATTERN =
             Pattern.compile("(?i)<(/?)(b|strong|i|em|br)\\s*/?>", Pattern.CASE_INSENSITIVE);
 
-    /** The base font used to render the label text. */
     private final ObjectProperty<Font> font =
             new SimpleObjectProperty<>(this, "font", FontRegistry.getDefault());
 
-    /** The text or HTML content displayed by this label. */
     private final StringProperty text =
             new SimpleStringProperty(this, "text", "");
 

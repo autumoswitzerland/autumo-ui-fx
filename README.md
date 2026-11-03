@@ -48,13 +48,13 @@ There is also a commercial version of this package that provides additional comp
 
 ### The key classes
 
-Start by reading the **Javadoc** shipped in the `doc/` folder. The following classes
-are key for development:
+Start by reading the **Javadoc**, which can be generated with `./gradlew javadoc`.
+The following classes are key for development:
 
 | Class | Purpose |
 | --- | --- |
 | `ch.autumo.ui.fx.BaseApp` | The JavaFX application you **subclass**. Lifecycle, configuration, logging, installer, licensing hooks, recent files. |
-| `ch.autumo.ui.fx.controller.BaseController` | Base controller for every JavaFX controller that binds controls to FXML views (`*.fxml`): initialization, customization and UI event handling. Delegate work to actions. Also owns the runtime **language menu** (`initializeLanguageMenu(menu)` — one radio item per supported language (text only, no flag icons), plus the Phosphor `translate` glyph on the menu itself, no PNG fallback — , `switchLanguage(lang)`) and calls the overridable `languageChanged()` hook, so an application only re-applies its own texts. |
+| `ch.autumo.ui.fx.controller.BaseController` | Base controller for every JavaFX controller that binds controls to FXML views (`*.fxml`): initialization, customization and UI event handling. Delegate work to actions. Also owns the runtime **language menu** (`initializeLanguageMenu(menu)` — one item per supported language, with the Phosphor `translate` glyph on the menu itself — and `switchLanguage(lang)`). Calls the overridable `languageChanged()` hook, so an application only needs to re-apply its own texts. |
 | `ch.autumo.ui.fx.controller.actions.BaseAction` | Simple action with one `execute(...)` method that has access to the controller, the application and the view. Used for all dialogs and menu/toolbar actions. |
 | `ch.autumo.ui.fx.view.BaseView` (`Pane`) | Base view for a JavaFX view; in most cases only a constructor is needed. Applies stylesheet styles. |
 | `ch.autumo.ui.fx.view.BaseBorderView` (`BorderPane`) | Border-pane variant of the base view. |
@@ -66,7 +66,7 @@ are key for development:
 ### Quickstart
 
 - Subclass `ch.autumo.ui.fx.BaseApp` (see chapter 3).
-- Read the Java API documentation in `doc/` (generated with `./gradlew javadoc`).
+- Read the [Javadoc](https://products.autumo.ch/javadoc/autumo-ui-fx/index.html).
 - Run the **autumo UI FX Demo** project to see a complete application in action: 
   [https://github.com/autumoswitzerland/autumo-ui-fx-demo](https://github.com/autumoswitzerland/autumo-ui-fx-demo)
 
@@ -93,7 +93,6 @@ plugins {
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
 }
 
@@ -109,35 +108,28 @@ javafx {
 }
 
 dependencies {
+	// autumo UI FX
+	implementation 'ch.autumo.commons:autumo-ui-fx:1.2.0'
+	
+	// Logging: required when the application uses SLF4J/Log4j directly.
     implementation 'org.apache.logging.log4j:log4j-api:2.26.1'
     implementation 'org.apache.logging.log4j:log4j-core:2.26.1'
     implementation 'org.apache.logging.log4j:log4j-slf4j2-impl:2.26.1'
-
-    // Code editor component (RSyntaxTextArea + RTextScrollPane, BSD-2-Clause), embedded
-    // into JavaFX with a SwingNode. The theme (cfg/edit.xml) ships with the
-    // framework; see DefaultCodeEditorView.
-    api 'com.fifesoft:rsyntaxtextarea:3.5.0'    
-    
-    // JSON pretty-printing for the JSON formatter pane.
-    implementation 'com.google.code.gson:gson:2.11.0'
-
-    implementation 'org.apache.commons:commons-lang3:3.21.0'
-    implementation "net.synedra:validatorfx:1.0.0"
 }
 
 application {
     mainClass = 'your.app.App'
 }
 
-// Allow JavaFX native access, required for interoperability with Swing/AWT on modern JDKs.
+// Allow JavaFX native access required for SwingNode interoperability with Swing/AWT on modern JDKs.
 tasks.named('run') {
     jvmArgs '--enable-native-access=javafx.graphics'
 }
 ```
 
 `javafx.swing` is required: the framework's code editor (RSyntaxTextArea) is embedded with
-a `SwingNode`. `--enable-native-access=javafx.graphics` keeps JDK 25 from warning about
-native access when the About/license panes render their `WebView`.
+a `SwingNode`. `--enable-native-access=javafx.graphics` allows the JavaFX graphics module
+to access restricted native methods without native-access warnings on JDK 25.
 
 ## 3. Subclassing `BaseApp`
 
@@ -162,8 +154,6 @@ override:
 public class MyApp extends BaseApp {
 
     private static final String BASE = "/ch/apps/myapp/";
-
-    private static final RegistrationVersion regVersion = new RegVersion();
 
     @Override
     protected Pane preInitialize(Stage stage, Properties cfg) {
@@ -216,7 +206,7 @@ logo and a scanner bar below it (a light that sweeps from left to right and back
 ```java
 @Override
 protected boolean isSplashScreenEnabled() {
-    return true;                            // no splash screen by default
+    return true; // Enable the splash screen.
 }
 
 @Override
@@ -286,7 +276,7 @@ stylesheet is looked up at `<resource-path>/ch/apps/style/application.css`.
 | --- | --- |
 | `app.cfg` | **Template for your application configuration.** Read from your resources and installed during the **first start** into the OS-specific application data folder. The resource path is defined by the overridden `getConfigTemplateFile`. In a Maven/Gradle project the resource root is usually `src/main/resources`; the resources are packed into your JAR preserving the directory structure. |
 | `installer-steps.cfg` | Defines the installer steps shown during installation. **If the file is missing, no installer is shown**; the same holds when no steps are defined. Loaded relative to your app class (e.g. `<resource-path>/ch/apps/cfg/installer-steps.cfg`). Property syntax; the key is a number (order, starting at 1), the value is a class implementing `ch.autumo.ui.fx.controller.actions.installer.Step`. |
-| `edit.xml` | Theme configuration for the [RSyntaxTextArea](https://bobbylight.github.io/RSyntaxTextArea/) syntax-highlighting component (unused by the framework itself). Useful if you build a text editor in your application (see the autumo Documents Viewer). Loadable with RSyntaxTextArea's theme loader. |
+| `edit.xml` | Theme configuration for the RSyntaxTextArea syntax-highlighting component. Used by the framework's default code editor and available to applications that implement their own editor. Useful if you build a text editor in your application (see the autumo Documents Viewer). Loadable with RSyntaxTextArea's theme loader. |
 | `theme.dtd` | The document type definition required for theme files such as `edit.xml`. |
 
 **Application data locations** (after first start):
@@ -416,41 +406,53 @@ HTML bodies of the standard panes, loaded relative to your app class.
 
 - **Build the module:**
   ```sh
-  ./gradlew build                # compile + jar
-  ./gradlew publishToMavenLocal  # installs ch.autumo.commons:autumo-ui-fx:1.2.0 to ~/.m2
+  ./gradlew build
   ```
-- **Dependencies of the module** (see `build.gradle`): the JavaFX
-  25 modules (`javafx-controls`, `javafx-fxml`, `javafx-web`, `javafx-swing`),
-  `rsyntaxtextarea:3.5.0`, `validatorfx:1.0.0`, `gson:2.11.0`, Log4j2 `2.26.1`
-  and `commons-lang3:3.21.0`.
-- **Install the library into the local Maven repository** (for Maven/Gradle consumers):
+
+- **Publish to the local Maven repository** (for local development and testing):
   ```sh
-  ./gradlew publishToMavenLocal  # installs ch.autumo.commons:autumo-ui-fx:1.2.0 to ~/.m2
+  ./gradlew publishToMavenLocal
   ```
-  Take a look at the `build.gradle` build script within the UI Demo project to see how
-  to set up your own development project, including the 3rd-party dependencies.
 
-**Order of steps for a first run:**
+- **Dependencies:** The framework uses RSyntaxTextArea 3.5.0, ValidatorFX 1.0.0, Gson 2.11.0, SLF4J 2.0.17, Log4j2 2.26.1 and Apache Commons Lang 3.21.0. JavaFX 25 is configured separately by the consuming application.
 
-1. `./gradlew publishToMavenLocal` in this project — publishes `autumo-ui-fx:1.2.0`.
-2. `./gradlew run` in the UI Demo project — starts the example application.
+For normal application development, use the published artifact from Maven Central. Publishing to Maven Local is only necessary when developing or testing changes to the framework itself.
 
-autumo-ui itself has no `run` task (it is a library). The Demo is the reference
-application and the quickest way to see the framework running.
+The UI Demo project demonstrates how to consume the published library:
+
+[https://github.com/autumoswitzerland/autumo-ui-fx-demo](https://github.com/autumoswitzerland/autumo-ui-fx-demo)
+
+**Order of steps for local framework development:**
+
+1. Run `./gradlew publishToMavenLocal` in this project.
+2. Run `./gradlew run` in the UI Demo project.
+
+autumo-ui-fx itself has no `run` task because it is a library. The Demo is the reference application and the quickest way to see the framework running.
 
 ## 6. Consuming the module
 
 ### 6.1 Dependencies of the module
 
-| Dependency                                | Scope      | Note |
-| ----------------------------------------- | ---------- | ----- |
-| `org.openjfx:javafx-controls/-fxml/-web/-swing:25` | `implementation` | The JavaFX modules. `javafx-swing` is required for the code editor (`SwingNode`). |
-| `com.fifesoft:rsyntaxtextarea:3.5.0`      | `api`      | The code editor component (RSyntaxTextArea + RTextScrollPane, BSD-2-Clause), embedded into JavaFX with a SwingNode. |
-| `net.synedra:validatorfx:1.0.0`, `com.google.code.gson:gson:2.11.0`, `org.apache.logging.log4j:*:2.26.1`, `org.apache.commons:commons-lang3:3.21.0` | `implementation` | Validation, the logging and the utilities. |
+The following dependencies and scopes reflect the current framework build.
+
+| Dependency | Scope | Note |
+|---|---|---|
+| `org.slf4j:slf4j-api:2.0.17` | `api` | SLF4J logging API, exposed to consuming applications. |
+| `org.apache.logging.log4j:log4j-api:2.26.1` | `implementation` | Log4j 2 logging API. |
+| `org.apache.logging.log4j:log4j-core:2.26.1` | `implementation` | Log4j 2 logging implementation. |
+| `org.apache.logging.log4j:log4j-slf4j2-impl:2.26.1` | `implementation` | SLF4J 2 binding for Log4j 2. |
+| `com.fifesoft:rsyntaxtextarea:3.5.0` | `api` | Code editor component (RSyntaxTextArea + RTextScrollPane), embedded into JavaFX with a SwingNode. |
+| `com.google.code.gson:gson:2.11.0` | `implementation` | JSON pretty-printing. |
+| `org.apache.commons:commons-lang3:3.21.0` | `implementation` | Utility classes. |
+| `net.synedra:validatorfx:1.0.0` | `implementation` | JavaFX control validation. |
+
+> JavaFX 25 is provided separately by the consuming application through the OpenJFX Gradle plugin. It is not exposed transitively by this library.
+
+Dependencies declared with `api` are available on the compile classpath of consuming applications. Dependencies declared with `implementation` are available at runtime but are not exposed on the consumers' compile classpath.
 
 ### 6.2 Adding it to a project
 
-**Maven** (after `./gradlew publishToMavenLocal`):
+**Maven (Maven Central):**
 
 ```xml
 <dependency>
@@ -463,7 +465,12 @@ application and the quickest way to see the framework running.
 **Gradle:**
 
 ```groovy
-implementation "ch.autumo.commons:autumo-ui-fx:1.2.0"
+repositories {
+    mavenCentral()
+}
+dependencies {
+	implementation "ch.autumo.commons:autumo-ui-fx:1.2.0"
+}
 ```
 
 > **JavaFX does not come transitively** — declare it in your own project (see 2.1).

@@ -49,11 +49,37 @@ jar {
 
 javadoc {
     title = 'autumo UI FX ' + version + ' API'
-    options.stylesheetFile = file("etc/javadoc/autumo.css")
+
+    // US English labels in the generated documentation. Javadoc's -locale option
+    // only affects tool messages; the standard doclet reads the JVM default
+    // locale, so it has to be set through -J flags.
+    options.jFlags '-Duser.language=en', '-Duser.country=US'
+
+    // Additional stylesheet; Gradle passes this as --add-stylesheet, so the
+    // bundled Javadoc stylesheet remains active and only the theme is applied.
+    options.addStringOption('-add-stylesheet', file('etc/javadoc/autumo.css').absolutePath)
+
+    // Track the stylesheet as a task input; otherwise CSS edits leave the
+    // Javadoc task up-to-date and the old stylesheet in the output.
+    inputs.file('etc/javadoc/autumo.css')
+
     options.windowTitle = 'autumo UI FX - Rapid Java FX development framework'
     options.docTitle = 'autumo UI FX ' + version + ' API'
+
+    // Company and product information shown in the navigation bar of every page.
+    options.header = '<a href="https://products.autumo.ch/" target="_top">autumo GmbH</a> &middot; autumo UI FX'
+
+    // Copyright and company link shown at the bottom of every page.
+    // Do not use options.footer: Javadoc 25 no longer supports -footer.
+    options.bottom = '&copy; 2026 autumo GmbH &middot; <a href="https://products.autumo.ch/" target="_top">products.autumo.ch</a>'
+
+    // UTF-8 for sources, generated HTML and the declared character set.
+    options.encoding = 'UTF-8'
+    options.charSet = 'UTF-8'
+    options.docEncoding = 'UTF-8'
+
     destinationDir = file("${buildDir}/docs/javadoc")
-    exclude 'ch/autumo/ui/fx/listener/**', 'ch/autumo/ui/fx/control/**'
+    exclude 'ch/autumo/ui/fx/listener/**'
 }
 
 repositories {
@@ -73,26 +99,35 @@ tasks.named('test') {
 }
 
 dependencies {
-    // Tests: the framework's own UI tests (the splash screen, the code editor) run with JUnit.
+
+    // JUnit: required for the framework's own UI tests (splash screen, code editor).
     testImplementation 'org.junit.jupiter:junit-jupiter:6.1.3'
     testImplementation platform('org.junit:junit-bom:6.1.3')
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+    // SLF4J API: exposed to consuming applications as part of the public compile classpath.
+    api "org.slf4j:slf4j-api:2.0.17"
+
+    // Logging implementation: Log4j 2 backend with SLF4J 2 binding.
     implementation "org.apache.logging.log4j:log4j-api:2.26.1"
     implementation "org.apache.logging.log4j:log4j-core:2.26.1"
     implementation "org.apache.logging.log4j:log4j-slf4j2-impl:2.26.1"
 
-    // Code editor component (RSyntaxTextArea + RTextScrollPane, BSD-2-Clause), embedded
-    // into JavaFX with a SwingNode. The theme (cfg/edit.xml) ships with the
-    // framework; see DefaultCodeEditorView.
+    // Code editor component (RSyntaxTextArea + RTextScrollPane, BSD-2-Clause),
+    // embedded into JavaFX using a SwingNode. The editor theme (cfg/edit.xml)
+    // is shipped with the framework; see DefaultCodeEditorView.
     api 'com.fifesoft:rsyntaxtextarea:3.5.0'
 
-    // JSON pretty-printing for the JSON formatter pane.
+    // Gson: used for JSON pretty-printing in the JSON formatter pane.
     implementation 'com.google.code.gson:gson:2.11.0'
 
+    // Apache Commons Lang: utility classes used internally by the framework.
     implementation 'org.apache.commons:commons-lang3:3.21.0'
+
+    // ValidatorFX: provides validation support for JavaFX controls.
     implementation "net.synedra:validatorfx:1.0.0"
 
+    // Maven Central publishing: includes this project in the aggregated deployment.
     nmcpAggregation project(':')
 }
 
