@@ -28,6 +28,18 @@ jobs:
       GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
     steps:
+      - name: Verify release tag
+        shell: bash
+        run: |
+          echo "Event: $GITHUB_EVENT_NAME"
+          echo "Ref: $GITHUB_REF"
+          echo "Ref type: $GITHUB_REF_TYPE"
+
+          if [[ "$GITHUB_REF_TYPE" != "tag" ]]; then
+            echo "::error::Publishing is only allowed from a Git tag."
+            exit 1
+          fi
+
       - name: Checkout repository
         uses: actions/checkout@v7
 
