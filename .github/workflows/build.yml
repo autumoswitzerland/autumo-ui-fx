@@ -106,7 +106,7 @@ jobs:
         with:
           tag_name: ${{ inputs.tag }}
           target_commitish: ${{ github.sha }}
-          name: autumo UI FX
+          name: autumo UI FX ${{ env.VERSION }}
           files: product/*.zip
           draft: false
           prerelease: false
