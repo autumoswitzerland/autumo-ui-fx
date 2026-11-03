@@ -89,7 +89,7 @@ dependencies {
 
     // JSON pretty-printing for the JSON formatter pane.
     implementation 'com.google.code.gson:gson:2.11.0'
-    
+
     implementation 'org.apache.commons:commons-lang3:3.21.0'
     implementation "net.synedra:validatorfx:1.0.0"
 
@@ -145,10 +145,9 @@ nmcpAggregation {
 }
 
 signing {
-    def signingKeyId = System.getenv('GPG_KEY_ID')
     def signingKey = System.getenv('GPG_SECRET_KEY')
     def signingPassword = System.getenv('GPG_PASSPHRASE')
 
-    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+    useInMemoryPgpKeys(signingKey, signingPassword)
     sign publishing.publications.autumoUI
 }
