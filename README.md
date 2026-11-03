@@ -108,10 +108,10 @@ javafx {
 }
 
 dependencies {
-	// autumo UI FX
-	implementation 'ch.autumo.commons:autumo-ui-fx:1.2.0'
-	
-	// Logging: required when the application uses SLF4J/Log4j directly.
+    // autumo UI FX
+    implementation 'ch.autumo.commons:autumo-ui-fx:1.2.0'
+
+    // Logging: required when the application uses SLF4J/Log4j directly.
     implementation 'org.apache.logging.log4j:log4j-api:2.26.1'
     implementation 'org.apache.logging.log4j:log4j-core:2.26.1'
     implementation 'org.apache.logging.log4j:log4j-slf4j2-impl:2.26.1'
@@ -469,7 +469,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
-	implementation "ch.autumo.commons:autumo-ui-fx:1.2.0"
+    implementation "ch.autumo.commons:autumo-ui-fx:1.2.0"
 }
 ```
 
