@@ -7,7 +7,7 @@
 
 ## 1. Introduction
 
-autumo UI is a **rapid JavaFX development framework**. It provides the application
+autumo UI FX is a **rapid JavaFX development framework**. It provides the application
 shell — lifecycle, installer, i18n (PO gettext), user settings and recent files 
 — so that an application is mostly the code that is actually specific to it.
 
