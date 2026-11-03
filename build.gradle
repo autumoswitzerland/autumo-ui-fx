@@ -107,8 +107,9 @@ publishing {
                 url = 'https://products.autumo.ch'
                 licenses {
                     license {
-                        name = 'Proprietary'
-                        url = 'https://autumo.ch'
+                        name = 'Apache License, Version 2.0'
+                        url = 'https://www.apache.org/licenses/LICENSE-2.0'
+                        distribution = 'repo'
                     }
                 }
             }
