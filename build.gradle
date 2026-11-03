@@ -92,6 +92,8 @@ dependencies {
     
     implementation 'org.apache.commons:commons-lang3:3.21.0'
     implementation "net.synedra:validatorfx:1.0.0"
+
+    nmcpAggregation project(':')
 }
 
 task sourceJar(type: Jar) {
@@ -103,7 +105,6 @@ publishing {
     publications {
         autumoUI(MavenPublication) {
             from components.java
-            artifact sourceJar
             pom {
                 name = 'autumo UI FX'
                 description = 'Java FX UI rapid development framework'
@@ -120,5 +121,13 @@ publishing {
     }
     repositories {
         mavenLocal()
+    }
+}
+
+nmcpAggregation {
+    centralPortal {
+        username = System.getenv('SONATYPE_USERNAME') ?: ''
+        password = System.getenv('SONATYPE_PASSWORD') ?: ''
+        publishingType = 'USER_MANAGED'
     }
 }
