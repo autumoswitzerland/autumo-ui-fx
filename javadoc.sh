@@ -22,4 +22,3 @@ gradle javadoc || exit 1
 cp -R etc/javadoc/fonts/* build/docs/javadoc/resource-files/
 
 echo "Javadoc generated in build/docs/javadoc"
-
