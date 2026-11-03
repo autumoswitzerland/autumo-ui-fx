@@ -37,7 +37,6 @@ jobs:
         shell: bash
         env:
           RELEASE_TAG: ${{ inputs.release_tag }}
-          GH_TOKEN: ${{ github.token }}
         run: |
           if [[ ! "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "::error::Invalid release tag format: $RELEASE_TAG"
@@ -46,7 +45,7 @@ jobs:
 
           if ! git ls-remote --exit-code --refs \
             "https://github.com/${GITHUB_REPOSITORY}.git" \
-            "refs/tags/${RELEASE_TAG}" | grep -q .; then
+            "refs/tags/${RELEASE_TAG}" >/dev/null; then
             echo "::error::Tag $RELEASE_TAG does not exist in the remote repository."
             exit 1
           fi
@@ -66,7 +65,7 @@ jobs:
           echo "Release tag: $RELEASE_TAG"
           echo "Commit: $(git rev-parse HEAD)"
 
-          PROJECT_VERSION=$(grep -m1 '^version =' build.gradle | sed -E "s/version = ['\"]([^'\"]+)['\"].*/\1/")
+          PROJECT_VERSION=$(grep -m1 '^version =' build.gradle | sed -E "s/^version = ['\"]([^'\"]+)['\"].*/\1/")
           RELEASE_VERSION="${RELEASE_TAG#v}"
 
           echo "Project version: $PROJECT_VERSION"
