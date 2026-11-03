@@ -113,6 +113,7 @@ dependencies {
     implementation 'org.apache.logging.log4j:log4j-core:2.26.1'
     implementation 'org.apache.logging.log4j:log4j-slf4j2-impl:2.26.1'
     
+    // JSON pretty-printing for the JSON formatter pane.
     implementation 'com.google.code.gson:gson:2.11.0'
     implementation 'org.apache.commons:commons-lang3:3.21.0'
 	implementation "net.synedra:validatorfx:1.0.0"
