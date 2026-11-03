@@ -19,7 +19,6 @@ jobs:
   publish:
     name: Build and publish
     runs-on: ubuntu-latest
-    if: github.ref_type == 'tag'
     timeout-minutes: 30
 
     env:
