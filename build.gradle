@@ -116,6 +116,18 @@ publishing {
                         distribution = 'repo'
                     }
                 }
+                developers {
+                    developer {
+                        name = 'autumo GmbH'
+                        organization = 'autumo GmbH'
+                        organizationUrl = 'https://www.autumo.ch'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:https://github.com/autumoswitzerland/autumo-ui-fx.git'
+                    developerConnection = 'scm:git:https://github.com/autumoswitzerland/autumo-ui-fx.git'
+                    url = 'https://github.com/autumoswitzerland/autumo-ui-fx'
+                }
             }
         }
     }
@@ -133,9 +145,10 @@ nmcpAggregation {
 }
 
 signing {
+    def signingKeyId = System.getenv('GPG_KEY_ID')
     def signingKey = System.getenv('GPG_SECRET_KEY')
     def signingPassword = System.getenv('GPG_PASSPHRASE')
 
-    useInMemoryPgpKeys(signingKey, signingPassword)
+    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
     sign publishing.publications.autumoUI
 }
