@@ -9,10 +9,13 @@
 
 name: Publish to Maven Central
 
-run-name: Publish ${{ github.ref_name }} to Maven Central
-
 on:
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Git release tag to publish (e.g. v1.2.0)'
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -30,32 +33,41 @@ jobs:
       GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
     steps:
-      - name: Verify release tag
+      - name: Validate release tag
         shell: bash
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+          GH_TOKEN: ${{ github.token }}
         run: |
-          echo "Event: $GITHUB_EVENT_NAME"
-          echo "Ref: $GITHUB_REF"
-          echo "Ref type: $GITHUB_REF_TYPE"
-          echo "Commit: $GITHUB_SHA"
-
-          if [[ "$GITHUB_REF_TYPE" != "tag" ]]; then
-            echo "::error::Publishing is only allowed from a Git tag."
+          if [[ ! "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Invalid release tag format: $RELEASE_TAG"
             exit 1
           fi
+
+          if ! git ls-remote --exit-code --refs \
+            "https://github.com/${GITHUB_REPOSITORY}.git" \
+            "refs/tags/${RELEASE_TAG}" | grep -q .; then
+            echo "::error::Tag $RELEASE_TAG does not exist in the remote repository."
+            exit 1
+          fi
+
+          echo "Release tag $RELEASE_TAG exists."
 
       - name: Checkout release tag
         uses: actions/checkout@v7
         with:
-          ref: ${{ github.ref }}
+          ref: refs/tags/${{ inputs.release_tag }}
 
       - name: Verify checked out version
         shell: bash
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
         run: |
-          echo "Release tag: $GITHUB_REF_NAME"
+          echo "Release tag: $RELEASE_TAG"
           echo "Commit: $(git rev-parse HEAD)"
 
           PROJECT_VERSION=$(grep -m1 '^version =' build.gradle | sed -E "s/version = ['\"]([^'\"]+)['\"].*/\1/")
-          RELEASE_VERSION="${GITHUB_REF_NAME#v}"
+          RELEASE_VERSION="${RELEASE_TAG#v}"
 
           echo "Project version: $PROJECT_VERSION"
           echo "Release version: $RELEASE_VERSION"
