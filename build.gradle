@@ -74,11 +74,6 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:6.1.3')
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    // JavaFX modules
-    implementation "org.openjfx:javafx-controls:25.0.4"
-    implementation "org.openjfx:javafx-fxml:25.0.4"
-    implementation "org.openjfx:javafx-web:25.0.4"
-
     // Code editor component (RSyntaxTextArea + RTextScrollPane, BSD-2-Clause), embedded
     // into JavaFX with a SwingNode. The theme (cfg/edit.xml) ships with the
     // framework; see DefaultCodeEditorView.

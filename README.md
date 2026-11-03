@@ -109,11 +109,6 @@ javafx {
 }
 
 dependencies {
-    // JavaFX modules
-    implementation "org.openjfx:javafx-controls:25.0.4"
-    implementation "org.openjfx:javafx-fxml:25.0.4"
-    implementation "org.openjfx:javafx-web:25.0.4"
-
     implementation 'org.apache.logging.log4j:log4j-api:2.26.1'
     implementation 'org.apache.logging.log4j:log4j-core:2.26.1'
     implementation 'org.apache.logging.log4j:log4j-slf4j2-impl:2.26.1'
