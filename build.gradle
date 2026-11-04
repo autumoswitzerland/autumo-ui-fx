@@ -67,11 +67,11 @@ javadoc {
     options.docTitle = 'autumo UI FX ' + version + ' API'
 
     // Company and product information shown in the navigation bar of every page.
-    options.header = '<a href="https://products.autumo.ch/" target="_top">autumo GmbH</a> &middot; autumo UI FX'
+    options.header = '<a href="https://autumo.ch/" target="_top">autumo GmbH</a> &middot; autumo UI FX'
 
     // Copyright and company link shown at the bottom of every page.
     // Do not use options.footer: Javadoc 25 no longer supports -footer.
-    options.bottom = '&copy; 2026 autumo GmbH &middot; <a href="https://products.autumo.ch/" target="_top">products.autumo.ch</a>'
+    options.bottom = '<img src="resource-files/footer-logo.webp" class="footerlogo" alt="autumo">&copy; 2026 autumo GmbH &middot; <a href="https://products.autumo.ch/" target="_top">products.autumo.ch</a>'
 
     // UTF-8 for sources, generated HTML and the declared character set.
     options.encoding = 'UTF-8'

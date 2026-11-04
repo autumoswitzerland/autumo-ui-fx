@@ -20,5 +20,6 @@ gradle javadoc || exit 1
 
 # Copy additional resources
 cp -R etc/javadoc/fonts/* build/docs/javadoc/resource-files/
+cp -R etc/javadoc/footer-logo.webp build/docs/javadoc/resource-files/
 
 echo "Javadoc generated in build/docs/javadoc"
