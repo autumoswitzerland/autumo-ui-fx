@@ -586,7 +586,7 @@ dependencies {
 
 ## 8. Further questions?
 
-Visit our Discord server: <https://discord.gg/xvAJrv6wmb>.
+Visit our Discord server: <https://discord.gg/72kBQCrJFj>.
 
 ## 9. Third-Party Licenses
 
