@@ -172,7 +172,7 @@ public abstract class BaseApp extends Application implements LicensedApplication
 		if (fileDebug != null && Boolean.parseBoolean(fileDebug)) {
 			String appName = this.getInternalAppName();
 			if (appName == null) {
-				appName = "autumo-ui";
+				appName = "autumo-ui-fx";
 			}
 	        try {
 	        	DEBUG_LOG_WRITER = new PrintWriter(new FileWriter(System.getProperty("user.home") + OSUtils.FILE_SEPARATOR + appName + "-debug.log", true), true);
@@ -199,12 +199,12 @@ public abstract class BaseApp extends Application implements LicensedApplication
 		
     	// Protocols: for once and all...
 		if (System.getProperty("https.protocols") == null) {
-			String prots = ConfigurationManager.getInstance().getString("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
+			String prots = ConfigurationManager.getInstance().getString("https.protocols", "TLSv1.1,TLSv1.2");
 			prots = prots.trim().replace(" ", "");
 			System.setProperty("https.protocols", prots);
 		}
 		if (System.getProperty("jdk.tls.client.protocols") == null) {
-			String prots = ConfigurationManager.getInstance().getString("jdk.tls.client.protocols", "TLSv1,TLSv1.1,TLSv1.2");
+			String prots = ConfigurationManager.getInstance().getString("jdk.tls.client.protocols", "TLSv1.1,TLSv1.2");
 			prots = prots.trim().replace(" ", "");
 			System.setProperty("jdk.tls.client.protocols", prots);
 		}		

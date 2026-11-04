@@ -44,7 +44,7 @@ public interface Logging {
 	public void initialize(String path, String name) throws IOException;
 	
 	/**
-	 * Initialize logging with an in-memory-built log4j2 configuration and appends output to file.
+	 * Initialize logging with an in-memory-built configuration and appends output to file.
 	 * Note: Might have an implementation or not.
 	 * 
 	 * @param inMemoryConfigName virtual configuration name

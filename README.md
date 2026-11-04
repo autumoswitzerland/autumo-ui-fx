@@ -110,11 +110,6 @@ javafx {
 dependencies {
     // autumo UI FX
     implementation 'ch.autumo.commons:autumo-ui-fx:1.2.0'
-
-    // Logging: required when the application uses SLF4J/Log4j directly.
-    implementation 'org.apache.logging.log4j:log4j-api:2.26.1'
-    implementation 'org.apache.logging.log4j:log4j-core:2.26.1'
-    implementation 'org.apache.logging.log4j:log4j-slf4j2-impl:2.26.1'
 }
 
 application {
@@ -126,6 +121,11 @@ tasks.named('run') {
     jvmArgs '--enable-native-access=javafx.graphics'
 }
 ```
+
+Logging needs no declarations: SLF4J is exposed on the application's compile classpath
+and the Log4j 2 backend comes transitively with the runtime classpath, so
+`LOG.error(...)` in a `BaseApp` subclass works out of the box. Declare the Log4j 2 dependencies yourself only
+if your code uses the Log4j API directly or if you want to pin their versions (see 7.1).
 
 `javafx.swing` is required: the framework's code editor (RSyntaxTextArea) is embedded with
 a `SwingNode`. `--enable-native-access=javafx.graphics` allows the JavaFX graphics module
@@ -264,13 +264,67 @@ protected void textChanged() {
 `textChanged()` is called for the changes of the **user** only - a text the application
 sets itself (`setText(...)`) does not trigger it.
 
-## 4. Resources
+## 4. Keyboard shortcuts
+
+The framework installs the shortcuts below itself. Application-specific shortcuts are
+added by overriding `keyPressed(KeyEvent)` in your `BaseController`.
+
+### Main view
+
+A view counts as main view when its FXML file name contains `main.fxml`
+(`UI.setup(...)`):
+
+| Shortcut | Action |
+| --- | --- |
+| `Ctrl`+`Shift`+`L` | Opens the application's log file `<application-data>/logs/<app>.log` in the default editor. |
+| `Ctrl`+`Shift`+`C` | Opens the application data folder `<application-data>` in the file manager. |
+
+> Both combinations use the **Control** key on every platform - also on macOS, where
+> `Cmd` is the usual modifier. `<application-data>` is the OS-specific folder described
+> in 5.1.
+
+### Secondary views
+
+| Shortcut | Action |
+| --- | --- |
+| `Esc` | Closes a secondary (non-main) view. `BaseController.escKeyPressed(KeyEvent)` does this by default; override it for a different behaviour. |
+
+### Standard dialogs
+
+| Shortcut | Action |
+| --- | --- |
+| `Esc` | Closes the dialogs created with `UI.showFineInformationDialog`, `showFineWarningDialog`, `showFineErrorDialog`, `showFineWarningConfirmationDialog` and `showFineConfirmationDialog`; in a confirmation it acts like *Cancel*. |
+
+### Code editor
+
+`DefaultCodeEditorView` embeds RSyntaxTextArea in a `SwingNode` and installs
+`EditorShortcuts`. The combinations are intercepted before Swing sees them, and the
+JavaFX system clipboard is used, so copy/paste with other applications works in both
+directions:
+
+| Shortcut | Action |
+| --- | --- |
+| `Cmd`/`Ctrl`+`C` | Copy |
+| `Cmd`/`Ctrl`+`V` | Paste |
+| `Cmd`/`Ctrl`+`X` | Cut |
+| `Cmd`/`Ctrl`+`A` | Select all |
+| `Cmd`/`Ctrl`+`Z` | Undo |
+| `Cmd`/`Ctrl`+`Shift`+`Z` | Redo |
+
+Paste, cut and undo/redo do nothing when the editor is read-only.
+
+### Recent files menu
+
+If the application uses the recent-files menu (`BaseController.initializeRecentMenu(...)`),
+the first entry gets the accelerator `Cmd`+`Shift`+`O` (`META`+`Shift`+`O`, i.e. macOS).
+
+## 5. Resources
 
 The resources are loaded **relative to your application class** (the `BaseApp`
 subclass). If your app class is in the package `ch.apps`, then e.g. the application
 stylesheet is looked up at `<resource-path>/ch/apps/style/application.css`.
 
-### 4.1 `cfg`
+### 5.1 `cfg`
 
 | Resource | Meaning |
 | --- | --- |
@@ -300,6 +354,7 @@ The manufacturer is read from the overridden `getManufacturer`.
 | `primaryStageStyle` | Decoration of the primary stage: `DECORATED`, `UNDECORATED`, `TRANSPARENT` or `UTILITY`. |
 | `installer.licStepOverOS` | Tell the installer to skip the default license step per system: `mac`, `win`, `linux`. Useful when an external installer already showed a license before the in-app installer defined by `installer-steps.cfg`. |
 | `https.protocols` | Protocols used for HTTP connections. |
+| `logging_implementation` | Fully qualified name of the logging implementation. It must implement `ch.autumo.ui.logging.Logging` and provide a no-arg constructor. Read at startup from the **template** `app.cfg`; unset: `ch.autumo.ui.logging.Log4j2Logging`. |
 
 All configuration parameters are available at runtime through your `BaseApp` subclass
 and the autumo-commons `ConfigurationManager`; file manipulation is possible with the
@@ -317,20 +372,20 @@ and the autumo-commons `ConfigurationManager`; file manipulation is possible wit
 > In every step (`BaseStep`) and every action (`BaseAction`), the controller is
 > available, and through it the **body of the GUI is a JavaFX pane**.
 
-### 4.2 `data`
+### 5.2 `data`
 
 | Resource | Meaning |
 | --- | --- |
 | `countries.csv` | Table of country names and the resource path to a country flag image in the autumo UI library. Used by the registration mask (opened via the `UI` class), which is only used together with the registration/licensing module. |
 
-### 4.3 `view`
+### 5.3 `view`
 
 | Resource | Meaning |
 | --- | --- |
 | `defaultInfoPane.fxml`, `registrationPane.fxml` | The FXML files for the standard dialogs; they open in Scene Builder. To change them, use the `showPane` UI methods where you can specify the FXML for your dialog. The resource path is always loaded relative to the view class (a `Pane`/`BorderPane`), so to customize library masks you patch `ch.autumo.ui.fx.view.DefaultInfoView` (all dialogs) or `ch.autumo.ui.fx.view.RegistrationView`. |
 | `main.fxml` (Demo) | The FXML of the UI Demo; use it as a template for your primary stage / main window if you want a toolbar and a basic layout — or build your own view from scratch. |
 
-### 4.4 `lang`
+### 5.4 `lang`
 
 All texts are gettext PO files; there are no `.properties` catalogues anymore.
 
@@ -342,7 +397,7 @@ All texts are gettext PO files; there are no `.properties` catalogues anymore.
 
 An application ships the catalogue of its own texts as `<your base resource path>/lang/messages.<LANG>.po`. Both catalogues are **merged** by the framework (`Helper.getMessageBundle`): the application's file is looked up first, the autumo-ui file fills the rest, so an application translates only its own texts — and may still override any framework text by defining its key. See `Helper.getTranslatedText`, `Helper.getText` and `Helper.setLanguage`.
 
-### 4.5 `style`
+### 5.5 `style`
 
 | Resource | Meaning |
 | --- | --- |
@@ -356,7 +411,7 @@ both — base style first, your `application.css` on top, if you ship one
 (`Helper.getApplicationStyleSheets(app)`) — so a sheet that only carries overrides keeps the
 framework look and its palette everywhere.
 
-### 4.6 `icons`
+### 5.6 `icons`
 
 Two icon mechanisms coexist:
 
@@ -393,7 +448,7 @@ Two icon mechanisms coexist:
 The library also ships the **Inter** font family and a default stylesheet, which are
 used as the framework default look.
 
-### 4.7 `html`
+### 5.7 `html`
 
 HTML bodies of the standard panes, loaded relative to your app class.
 
@@ -402,7 +457,7 @@ HTML bodies of the standard panes, loaded relative to your app class.
 | `html/about_LANG.html`, `html/license_LANG.html` | Body of the About/License pane and of the installer's about/license steps. These are **application** resources — an application ships its own texts (`LANG` = 2-character language code, `en` as fallback). |
 | `html/remove_LANG.html` | Body of the **Remove app-data** pane (`UI.showRemovePane`). The library ships a generic default (`ch/autumo/ui/html/remove_en.html`, `remove_de.html`), so the pane works out of the box; ship the file in your application only if you want different wording. The lookup `Helper.getAppResourceOrBase(app, path)` implements exactly this: your resource first, the library default second — use it for any pane content an application may, but does not have to, provide. |
 
-## 5. Building and packaging
+## 6. Building and packaging
 
 - **Build the module:**
   ```sh
@@ -429,18 +484,18 @@ The UI Demo project demonstrates how to consume the published library:
 
 autumo-ui-fx itself has no `run` task because it is a library. The Demo is the reference application and the quickest way to see the framework running.
 
-## 6. Consuming the module
+## 7. Consuming the module
 
-### 6.1 Dependencies of the module
+### 7.1 Dependencies of the module
 
 The following dependencies and scopes reflect the current framework build.
 
 | Dependency | Scope | Note |
 |---|---|---|
 | `org.slf4j:slf4j-api:2.0.17` | `api` | SLF4J logging API, exposed to consuming applications. |
-| `org.apache.logging.log4j:log4j-api:2.26.1` | `implementation` | Log4j 2 logging API. |
-| `org.apache.logging.log4j:log4j-core:2.26.1` | `implementation` | Log4j 2 logging implementation. |
-| `org.apache.logging.log4j:log4j-slf4j2-impl:2.26.1` | `implementation` | SLF4J 2 binding for Log4j 2. |
+| `org.apache.logging.log4j:log4j-api:2.26.1` | `implementation` | Log4j 2 logging API; arrives at runtime, no declaration needed in the application. |
+| `org.apache.logging.log4j:log4j-core:2.26.1` | `implementation` | Log4j 2 logging implementation; arrives at runtime. |
+| `org.apache.logging.log4j:log4j-slf4j2-impl:2.26.1` | `implementation` | SLF4J 2 binding for Log4j 2; arrives at runtime. |
 | `com.fifesoft:rsyntaxtextarea:3.5.0` | `api` | Code editor component (RSyntaxTextArea + RTextScrollPane), embedded into JavaFX with a SwingNode. |
 | `com.google.code.gson:gson:2.11.0` | `implementation` | JSON pretty-printing. |
 | `org.apache.commons:commons-lang3:3.21.0` | `implementation` | Utility classes. |
@@ -450,7 +505,60 @@ The following dependencies and scopes reflect the current framework build.
 
 Dependencies declared with `api` are available on the compile classpath of consuming applications. Dependencies declared with `implementation` are available at runtime but are not exposed on the consumers' compile classpath.
 
-### 6.2 Adding it to a project
+**Logging.** An application does not have to declare any logging dependency. SLF4J is
+part of the compile classpath (`api`), the Log4j 2 backend part of the runtime classpath
+(`implementation`), so `LOG.error(...)` in a `BaseApp` subclass compiles and runs as-is.
+
+`BaseApp` also configures Log4j 2 itself (`LoggingFactory` → `Log4j2Logging`), so no
+`log4j2.xml` is needed in the application. The default configuration logs at level
+**ERROR** to `<properties-path>/logs/<app>.log` (on macOS
+`~/Library/Application Support/<vendor>/<app>/logs`, on Windows `%APPDATA%\<vendor>\<app>\logs`,
+on Unix `~/.<app>/logs`). `warn`, `info`, `debug` and `trace` stay invisible until the
+level is changed — for example with `-Dlog4j2.configurationFile=<path>/log4j2.xml`.
+
+Declare the Log4j 2 dependencies in your own build only if
+
+- your code uses the Log4j 2 API directly (`org.apache.logging.log4j.Logger`, `LogManager`, `ThreadContext`, ...),
+- you want to pin their versions (security updates, conflict resolution), or
+- you replace the backend (e.g. Logback) and therefore have to exclude it.
+
+**Custom logging implementation.** The backend is pluggable; the logging component
+(`ch.autumo.ui.logging.Logging`, `LoggingFactory`, `Log4j2Logging`) is part of autumo UI
+FX itself. Set `logging_implementation` in the application's template `app.cfg` to the
+fully qualified name of a class that implements `ch.autumo.ui.logging.Logging` and has a
+no-arg constructor:
+
+```properties
+# <your-resources>/<package>/cfg/app.cfg
+logging_implementation=ch.apps.logging.LogbackLogging
+```
+
+```java
+package ch.apps.logging;
+
+public class LogbackLogging implements ch.autumo.ui.logging.Logging {
+
+    public LogbackLogging() {
+    }
+
+    // initialize(), initialize(String, String),
+    // initializeInMemoryFile(String, String), initializeInMemoryConsole(String, String)
+}
+```
+
+`BaseApp` pre-loads the template configuration before it creates the logging factory, so
+the key takes effect from the first log statement on. Any backend that can be driven
+through the interface can be used this way — for example Logback wrapped in a `Logging`
+implementation; the Log4j 2 artifacts then have to be excluded and the Logback
+dependencies added instead.
+
+The key is read from the **template** `app.cfg` in your resources (the file
+`getConfigTemplateFile()` points to); the installed `app.cfg` in the user's application
+data folder is loaded later in the startup sequence and does not influence the logging
+implementation. This is intentional: the logging backend is a development decision made
+when the application is built, not a per-installation setting of the shipped product.
+
+### 7.2 Adding it to a project
 
 **Maven (Maven Central):**
 
@@ -476,15 +584,15 @@ dependencies {
 > **JavaFX does not come transitively** — declare it in your own project (see 2.1).
 > If you pin your own JavaFX version, use it consistently for the plugin and the dependencies.
 
-## 7. Further questions?
+## 8. Further questions?
 
 Visit our Discord server: <https://discord.gg/xvAJrv6wmb>.
 
-## 8. Third-Party Licenses
+## 9. Third-Party Licenses
 
 See `THIRDPARTYLICENSES.md`.
 
-## 9. License
+## 10. License
 
 Apache License — Version 2.0, January 2004.
 
