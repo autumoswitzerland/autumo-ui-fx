@@ -53,7 +53,7 @@ public interface Logging {
 	public void initializeInMemoryFile(String inMemoryConfigName, String appName);
 	
 	/**
-	 * Initialize logging with an in-memory-built log4j2 configuration 
+	 * Initialize logging with an in-memory-built configuration
 	 * Note: Might have an implementation or not.
 	 * 
 	 * @param inMemoryConfigName virtual configuration name
