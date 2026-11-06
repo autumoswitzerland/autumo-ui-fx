@@ -551,8 +551,8 @@ public abstract class BaseApp extends Application implements LicensedApplication
 	public void stop() throws Exception {
 		// The splash screen must not keep the application alive: it goes away with it.
 		this.hideSplash();
-        this.storeProps();
         this.finish(this.primaryStage);
+        this.storeProps();
         // The JavaFX runtime is gone, but the JVM can still be held by other threads - the AWT
         // event dispatch thread of the embedded Swing editor, for example. An application that
         // uses the editor says so (isJvmExitOnStop()).
