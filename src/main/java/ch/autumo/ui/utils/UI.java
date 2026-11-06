@@ -285,7 +285,10 @@ public class UI {
 			    baseController.keyPressed(key);
 			});
 		}
-		
+
+		// Icons
+		app.applyApplicationIcon(stage);
+
 		return baseController;
 	}
 

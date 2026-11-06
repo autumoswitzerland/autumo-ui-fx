@@ -45,6 +45,7 @@ import ch.autumo.ui.data.CountryData;
 import ch.autumo.ui.fx.BaseApp;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
+import javafx.scene.image.Image;
 import javafx.scene.web.WebView;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -366,6 +367,29 @@ public class Helper {
 				icons.add(icon);
 		}
 		return icons;
+	}
+
+	/**
+	 * Applies the application icon to a stage: the application's own icons
+	 * if the application ships any, otherwise the default autumo-ui logo.
+	 * 
+	 * <p>See {@link Helper#getApplicationIcons(BaseApp)} for the icon convention. The
+	 * icons are applied on all operating systems: they are the window and task-bar
+	 * icon on Windows and Linux. On macOS the dock icon of a packaged application is
+	 * defined by the application package (jpackage {@code --icon}, {@code .icns}),
+	 * because JavaFX stage icons do not reach the macOS dock.</p>
+	 * 
+     * @param app the application
+	 * @param primaryStage primary stage
+	 */
+	public static void applyApplicationIcon(BaseApp app, Stage primaryStage) {
+		for (URL iconUrl : Helper.getApplicationIcons(app)) {
+			try {
+				primaryStage.getIcons().add(new Image(iconUrl.toExternalForm()));
+			} catch (Exception e) {
+				LOG.warn("Could not load application icon '{}'!", iconUrl, e);
+			}
+		}
 	}
 
     /**

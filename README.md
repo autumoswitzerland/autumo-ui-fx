@@ -109,7 +109,7 @@ javafx {
 
 dependencies {
     // autumo UI FX
-    implementation 'ch.autumo.commons:autumo-ui-fx:1.2.0'
+    implementation 'ch.autumo.commons:autumo-ui-fx:1.3.0'
 }
 
 application {
@@ -566,7 +566,7 @@ when the application is built, not a per-installation setting of the shipped pro
 <dependency>
     <groupId>ch.autumo.commons</groupId>
     <artifactId>autumo-ui-fx</artifactId>
-    <version>1.2.0</version>
+    <version>1.3.0</version>
 </dependency>
 ```
 
@@ -577,7 +577,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    implementation "ch.autumo.commons:autumo-ui-fx:1.2.0"
+    implementation "ch.autumo.commons:autumo-ui-fx:1.3.0"
 }
 ```
 

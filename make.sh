@@ -18,7 +18,7 @@
 
 
 # VARS
-VERSION=1.2.0
+VERSION=1.3.0
 
 # Always operate from this script's directory, regardless of the caller's CWD
 cd "$(dirname "$0")"

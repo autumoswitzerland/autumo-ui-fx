@@ -20,7 +20,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
-import java.net.URL;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -61,7 +60,6 @@ import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -500,22 +498,16 @@ public abstract class BaseApp extends Application implements LicensedApplication
 	 * Applies the application icon to the primary stage: the application's own icons
 	 * if the application ships any, otherwise the default autumo-ui logo.
 	 * 
-	 * <p>See {@link Helper#getApplicationIcons(BaseApp)} for the icon convention. The
-	 * icons are applied on all operating systems: they are the window and task-bar
+	 * <p>See {@link Helper#applyApplicationIcon(BaseApp, Stage)} for the icon convention.
+	 * The icons are applied on all operating systems: they are the window and task-bar
 	 * icon on Windows and Linux. On macOS the dock icon of a packaged application is
 	 * defined by the application package (jpackage {@code --icon}, {@code .icns}),
 	 * because JavaFX stage icons do not reach the macOS dock.</p>
 	 * 
-	 * @param primaryStage primary stage
+	 * @param stage primary stage
 	 */
-	private void applyApplicationIcon(Stage primaryStage) {
-		for (URL iconUrl : Helper.getApplicationIcons(this)) {
-			try {
-				primaryStage.getIcons().add(new Image(iconUrl.toExternalForm()));
-			} catch (Exception e) {
-				LOG.warn("Could not load application icon '{}'!", iconUrl, e);
-			}
-		}
+	public void applyApplicationIcon(Stage stage) {
+		Helper.applyApplicationIcon(this, stage);
 	}
 
 	/**
